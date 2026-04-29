@@ -1,8 +1,8 @@
 // SpartaGameMode.cpp
 
 #include "SpartaGameMode.h"
-#include "NPC.h"
+#include "SpartaActor.h"
 
 ASpartaGameMode::ASpartaGameMode() {
-	DefaultPawnClass = ANPC::StaticClass();
+	DefaultPawnClass = ASpartaActor::StaticClass();
 }
