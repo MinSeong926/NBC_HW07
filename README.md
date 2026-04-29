@@ -10,3 +10,7 @@
 1. 6자유도(6 DOF) 비행체 구현
 2. 중력 및 낙하 시스템 구현
 3. 에어 컨트롤(Air Control) 구현
+
+
+[시연 영상]
+https://youtu.be/naSVsFLMses
