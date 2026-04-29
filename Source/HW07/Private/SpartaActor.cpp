@@ -36,7 +36,7 @@ ASpartaActor::ASpartaActor()
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
 	SpringArmComp->SetupAttachment(RootComponent);
 	SpringArmComp->TargetArmLength = 400.0f;
-	SpringArmComp->bUsePawnControlRotation = false; // 마우스 입력을 코드로 직접 제어하므로 꺼둡니다.
+	SpringArmComp->bUsePawnControlRotation = false;
 
 	// 4. 카메라 생성 및 설정
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
@@ -104,14 +104,11 @@ void ASpartaActor::Look(const FInputActionValue& Value)
 	{
 		float DeltaTime = GetWorld()->GetDeltaSeconds();
 
-		// 엔진 기본 제공 함수(AddControllerYawInput 등)를 사용하지 않고 직접 계산
 		float YawInput = LookAxisVector.X * RotationSpeed * DeltaTime;
 		float PitchInput = LookAxisVector.Y * RotationSpeed * DeltaTime;
 
-		// 평면 이동 및 회전 처리를 위해 Pawn(몸통)은 좌우(Yaw)로만 회전시킵니다.
 		AddActorLocalRotation(FRotator(0.0f, YawInput, 0.0f));
 
-		// 상하(Pitch) 회전은 카메라(SpringArm)에만 적용하여 폰 자체가 바닥으로 고개를 숙이지 않도록 처리합니다.
 		SpringArmComp->AddLocalRotation(FRotator(PitchInput, 0.0f, 0.0f));
 	}
 }
